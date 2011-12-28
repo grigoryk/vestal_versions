@@ -15,8 +15,17 @@ module VestalVersions
       # Version records corresponding to version number 1 are not typically created, but one will
       # be built to house the given tag if the parent object's current version number is 1.
       def tag_version(tag)
-        v = versions.at(version) || versions.build(:number => 1)
+        v = get_version()
         v.tag!(tag)
+      end
+      
+      def remove_tag
+        v = get_version()
+        v.remove_tag!
+      end
+      
+      def get_version
+        versions.at(version) || versions.build(:number => 1)
       end
     end
 
@@ -33,6 +42,12 @@ module VestalVersions
       def tag!(tag)
         write_attribute(:tag, tag)
         save ? tag : nil
+      end
+      
+      # Removes the currently set string in the version tag column.
+      def remove_tag!
+        write_attribute(:tag, nil)
+        save ? true : false
       end
 
       # Simply returns a boolean signifying whether the version instance has a tag value attached.
