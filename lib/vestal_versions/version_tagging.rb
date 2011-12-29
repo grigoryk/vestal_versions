@@ -19,7 +19,7 @@ module VestalVersions
         v.tag!(tag)
       end
       
-      def remove_tag
+      def remove_tag!
         v = get_version()
         v.remove_tag!
       end
