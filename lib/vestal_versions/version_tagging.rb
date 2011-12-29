@@ -24,6 +24,7 @@ module VestalVersions
         v.remove_tag!
       end
       
+      private
       def get_version
         versions.at(version) || versions.build(:number => 1)
       end
