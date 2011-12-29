@@ -24,6 +24,12 @@ module VestalVersions
         v.remove_tag!
       end
       
+      def remove_all_tags!
+        versions.each do |v|
+          v.remove_tag!
+        end
+      end
+      
       private
       def get_version
         versions.at(version) || versions.build(:number => 1)
@@ -50,7 +56,7 @@ module VestalVersions
         write_attribute(:tag, nil)
         save ? true : false
       end
-
+      
       # Simply returns a boolean signifying whether the version instance has a tag value attached.
       def tagged?
         !tag.nil?
